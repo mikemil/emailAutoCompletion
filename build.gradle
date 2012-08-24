@@ -1,0 +1,12 @@
+apply plugin: 'java'
+ 
+task "create-dirs" << {
+   sourceSets*.java.srcDirs*.each { it.mkdirs() }
+   sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
+task(runCompletionSample, dependsOn: 'classes', type: JavaExec) {
+    main = 'util.CompletionSample'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+defaultTasks 'runJarSigners'
